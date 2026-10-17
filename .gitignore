@@ -19,3 +19,5 @@ outputs/*.png
 outputs/
 private-library/
 .pytest_cache/
+# Private LinkedIn draft
+/docs/LINKEDIN-POST.md
