@@ -1,0 +1,11 @@
+{
+  "name": "reelbox-local",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"sync": "node sync.mjs", "login": "node sync.mjs --login"},
+  "dependencies": {
+    "api-anything": "file:vendor/api-anything-0.1.0.tgz",
+    "playwright-core": "1.63.0"
+  }
+}

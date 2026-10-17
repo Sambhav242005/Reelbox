@@ -1,0 +1,21 @@
+# Local runtime, credentials and generated evidence
+**/data/
+**/runtime.json
+**/node_modules/
+**/__pycache__/
+*.py[cod]
+.venv/
+work/
+graphify-out/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+*.sqlite*
+*.db
+outputs/*.zip
+outputs/*.png
+outputs/
+private-library/
+.pytest_cache/

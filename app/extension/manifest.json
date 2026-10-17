@@ -1,0 +1,11 @@
+{
+ "manifest_version":3,
+ "name":"Reelbox — Instagram saves",
+ "version":"0.2.0",
+ "description":"Sync Instagram saves from your normal browser to your local Reelbox AI library.",
+ "permissions":["storage","alarms","tabs","scripting","cookies"],
+ "host_permissions":["https://*.instagram.com/*","http://127.0.0.1:8765/*"],
+ "background":{"service_worker":"worker.js"},
+ "action":{"default_popup":"popup.html"},
+ "content_scripts":[{"matches":["https://www.instagram.com/*"],"js":["collector.js"],"run_at":"document_idle"}]
+}
