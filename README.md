@@ -4,6 +4,14 @@
 
 Reelbox collects your saved reel links through a Chromium extension, organizes them into topic folders, and lets you search, browse and revisit them from a local dashboard.
 
+## See it organize real reels
+
+[![Watch Reelbox move a saved reel into its topic folder](docs/media/reelbox-preview.gif)](docs/media/reelbox-demo.mp4)
+
+[Watch the captioned demo](docs/media/reelbox-demo.mp4) · [Measured results](docs/BENCHMARK.md) ? [Recording guide](docs/DEMO.md)
+
+The demo features GitHub, AI, coding and technology saves, with live progress and measured speed. It uses cached captions and covers with fresh local inference; Instagram retrieval is excluded. The configured model alias resolves to a 752M Qwen-family model on the recording machine. See the benchmark for the exact workload and hardware; completion is not an accuracy claim.
+
 ## What it does
 
 - Browse thumbnail cards or a list, with light and dark themes.
@@ -12,6 +20,7 @@ Reelbox collects your saved reel links through a Chromium extension, organizes t
 - Start analysis with title, caption and cover. Video downloads require approval for each reel.
 - Show whether evidence comes from captions/covers or sampled frames and speech.
 - Preserve queued work, Stop/Resume state and verification pauses across restarts.
+- Follow a reel through Unorganized → Organizing → its topic folder, with durable timing and successful-reel throughput.
 
 The current defaults use local `minicpm-v4.6:latest` for vision, writing and routing, plus `nomic-embed-text` for retrieval. The code also retains an optional D1 integration; D1 is not required by the current defaults. Model scores are estimates, not calibrated accuracy percentages.
 

@@ -78,6 +78,7 @@ async function refresh(){
  if(refreshing)return;refreshing=true;
  try{
   const [newBoxes,health,sync,notifications,processing]=await Promise.all([api('/boxes'),api('/health'),api('/sync-status'),api('/notifications'),api('/processing')]);
+  if(typeof renderProcessing==='function')renderProcessing(processing);
   const batchSize=processing.batch_size;
   $('#batch-panel').hidden=false;
   const progress=`Batch ${processing.batch_id}: ${processing.completed}/${batchSize || 'unlimited'} reels finished. ${processing.queued} queued.`;

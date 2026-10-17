@@ -2,6 +2,8 @@
 
 Current defaults use local MiniCPM for vision and routing, text embeddings for retrieval, and five reel workers. The model-override and concurrency sections below supersede the earlier D1-first and single-worker descriptions. Video analysis always requires explicit approval per reel. See [project structure](project-structure.md), [usage](USAGE.md), and [root agent instructions](../AGENTS.md).
 
+The permanent processing panel shows Unorganized, Organizing and Organized above the collection, with separate review, model-wait and error totals. Additive telemetry measures only newly claimed analysis work, persists through retries/restarts, and counts successful analysis with a folder separately from batch completion. Metadata-only backfills and old records do not gain inference timings. See [the demo and telemetry contract](DEMO.md).
+
 Status: D1-first local-model implementation, 2026-10-16. Automated checks use temporary libraries and simulated model responses. D1 and MiniCPM passed live synthetic-image checks; real-account behavior remains a separate verification.
 
 ## Goal

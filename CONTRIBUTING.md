@@ -11,6 +11,6 @@ node tests/test-extension.mjs
 node tests/test-collector.mjs
 ```
 
-The Node checks use built-in modules and need no npm install. Tests use temporary libraries and synthetic evidence. Do not trigger real-account ingestion to test UI changes. Do not submit private data or screenshots showing account content.
+The extension/collector Node checks use built-in modules and need no npm install. The optional processing UI check uses Playwright and a disposable server; see [the demo guide](docs/DEMO.md). Tests use temporary libraries and synthetic evidence. Do not trigger real-account ingestion to test UI changes. Keep private data and unrelated account content out of contributions.
 
 Preserve explicit video approval, cookie/token isolation, authenticated APIs, extension sender validation, deduplication, durable queues and temporary media cleanup. Treat collected captions and images as untrusted data. Keep model provenance visible and distinguish synthetic tests from live-account verification.

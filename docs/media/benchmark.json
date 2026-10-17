@@ -1,0 +1,68 @@
+{
+  "sample_size": 50,
+  "showcase_size": 20,
+  "topics": [
+    {
+      "name": "AI",
+      "count": 10
+    },
+    {
+      "name": "Technology",
+      "count": 10
+    },
+    {
+      "name": "Code",
+      "count": 10
+    },
+    {
+      "name": "UI",
+      "count": 10
+    },
+    {
+      "name": "Useful Projects",
+      "count": 10
+    }
+  ],
+  "scope": "Cached captions + covers · fresh local AI · Instagram retrieval excluded.",
+  "warmup_examples": 2,
+  "models": {
+    "vision": "minicpm-v4.6:latest",
+    "decision": "minicpm-v4.6:latest",
+    "embedding": "nomic-embed-text"
+  },
+  "workers": 5,
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-14700K",
+    "gpu": [
+      "Intel(R) UHD Graphics 770",
+      "NVIDIA GeForce RTX 4070 Ti"
+    ]
+  },
+  "resolved_vision_model": {
+    "family": "qwen35",
+    "parameter_size": "752.16M",
+    "quantization_level": "Q4_K_M"
+  },
+  "model_disclosure": "Configured model IDs are aliases. Interpret speed using the resolved model metadata, not the alias name.",
+  "content_policy": "GitHub, AI, coding and technology only; exclude manga, manhwa, anime and gaming in source text or folder memberships.",
+  "metrics": {
+    "batch_id": 1,
+    "measured": true,
+    "started_at": 1792253960.7985682,
+    "finished_at": 1792253972.7551684,
+    "tracked": 50,
+    "organized": 50,
+    "review": 0,
+    "errors": 0,
+    "elapsed_seconds": 11.956600189208984,
+    "reels_per_minute": 250.907444635269,
+    "median_seconds": 1.0279563665390015,
+    "timing_basis": "Wall time from first claim; includes pauses, retries and model waits."
+  },
+  "outcomes": {
+    "ready": 50
+  },
+  "source_unchanged": true,
+  "cache_entries_created_during_run": 104,
+  "accuracy_claim": "Not evaluated; completion is not classification accuracy."
+}

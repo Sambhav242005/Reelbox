@@ -10,6 +10,9 @@ Reelbox/
   docs/spec.md         Product contracts and historical revisions
   docs/project-structure.md  This repository map
   docs/history/        Historical implementation notes
+  docs/DEMO.md         Recording workflow and processing telemetry contract
+  docs/media/          Public demo, animated preview and benchmark metadata
+  scripts/             Isolated sample preparation, recorder and media exporter
   AGENTS.md            Root contributor and agent instructions
   README.md            Installation and first use
   CONTRIBUTING.md       Development and validation
@@ -24,6 +27,8 @@ Local-only directories are ignored: `app/data/`, `work/` (including the existing
 The current default is MiniCPM for vision and decisions, with text embeddings for retrieval. D1-first sections in historical contracts describe an earlier configuration.
 
 ## Implementation boundaries
+
+`app/processing_metrics.py` owns additive run/timing storage and board snapshots. `app/web/processing.js` renders authenticated state, follows one reel and rejects stale snapshots. `scripts/demo-library.py` reads the original library without writing it and prepares a guarded local-only inference run. All private samples, raw recordings, source fingerprints and field maps live under ignored `work/` directories.
 
 Keep the existing application entry point and extension pairing behavior. `model_client.py` owns provider configuration, HTTP transport, images, chat JSON repair, and typed decision validation. `app.py` owns migrations, metadata/cover acquisition, caching, analysis, candidate retrieval, routing policy, and persistence. The additive migration preserves old records and introduces analysis mode, source title, metadata state, and explicit video requests.
 

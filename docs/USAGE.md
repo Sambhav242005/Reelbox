@@ -24,6 +24,8 @@ If you choose a custom data directory, keep it outside your publication files or
 
 ## Everyday controls
 
+The processing panel above the library shows queued, active and successfully organized reels. Use the small follow button to keep one reel visible as it moves into its folder. Timing and speed apply to the current measured run; existing records initially show **Not measured**. Review and errors are not successful organization. The panel's Resume/Stop button uses the same durable controls as Queue & controls.
+
 - **Sync now** in the extension starts collection. Dashboard sync requests wait for the extension alarm.
 - **Needs review** contains uncertain or incomplete evidence. A missing cover gets at most ten retrieval rounds before a persistent notice and hold.
 - **Retry missing info** renews the metadata budget. It does not grant video approval.

@@ -16,6 +16,7 @@ import threading
 import time
 import urllib.request
 import model_client
+import processing_metrics
 import instagram_source
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -89,6 +90,7 @@ def initialize():
           box_id INTEGER REFERENCES boxes(id) ON DELETE CASCADE,
           PRIMARY KEY(reel_id,box_id));
         ''')
+        processing_metrics.initialize(db)
         columns = {r['name'] for r in db.execute('PRAGMA table_info(reels)')}
         for name, definition in {'analysis_mode': "TEXT NOT NULL DEFAULT ''", 'cover_url': "TEXT NOT NULL DEFAULT ''",
                                  'force_video': 'INTEGER NOT NULL DEFAULT 0', 'metadata_checked': 'INTEGER NOT NULL DEFAULT 0',
@@ -327,6 +329,7 @@ def update(rid, status, **fields):
         keys = ['status','updated'] + list(fields)
         db.execute('UPDATE reels SET ' + ','.join(key+'=?' for key in keys) + ' WHERE id=?',
                    [status, time.time(), *fields.values(), rid])
+        processing_metrics.finish(db, rid)
 
 def run(args, timeout=120):
     checkpoint()
@@ -737,6 +740,7 @@ def save_analysis(rid, analysis, vector, mode, ids, reason, decision):
         db.execute('UPDATE reels SET title=?,analysis=?,embedding=?,analysis_mode=?,status=?,error=?,force_video=0,evidence_key=?,updated=? WHERE id=?',
                    (analysis['title'],json.dumps(analysis),json.dumps(vector),mode,'ready' if ids else 'review','',evidence_key,time.time(),rid))
         append_folder_match_reel(db,rid)
+        processing_metrics.finish(db,rid)
 
 def request_video_approval(row, decision):
     """Hold the reel without downloading; only Analyze video grants permission."""
@@ -748,6 +752,7 @@ def request_video_approval(row, decision):
                      evidence_basis=value.get('evidence_basis','caption_and_cover'))
         db.execute("UPDATE reels SET status='review',error='',force_video=0,analysis=?,updated=? WHERE id=?",(json.dumps(value),time.time(),row['id']))
         db.execute("INSERT INTO notifications(reel_id,kind,message,created,dismissed) VALUES(?,?,?,?,0) ON CONFLICT(reel_id,kind) DO UPDATE SET message=excluded.message,created=excluded.created,dismissed=0",(row['id'],'video_approval','Video analysis needs your approval: '+reason,time.time()))
+        processing_metrics.finish(db,row['id'])
 
 
 def process_reel(row, source=None):
@@ -933,7 +938,8 @@ def processing_status(db):
     queued = db.execute("SELECT count(*) FROM reels WHERE status IN ('queued','waiting_model')").fetchone()[0]
     reached = size>0 and counts['used']>=size
     window = queue_window(db,batch,size)
-    return {'folder_matching':db.execute("SELECT count(*) FROM folder_matches WHERE state!='done'").fetchone()[0],
+    return {'observed_at':time.time(), 'metrics':processing_metrics.summary(db,batch), 'board':processing_metrics.board(db,DATA,batch),
+            'folder_matching':db.execute("SELECT count(*) FROM folder_matches WHERE state!='done'").fetchone()[0],
             'queue_capacity':QUEUE_WINDOW,'queue_window':[r['id'] for r in window],
             'in_flight':sum(r['status'] not in ('queued','waiting_model') for r in window),
             'batch_size':size,'batch_id':batch,'attempted':counts['used'],'completed':counts['completed'],
@@ -957,6 +963,8 @@ def claim_next_reel():
             return None
         db.execute('INSERT OR IGNORE INTO processing_batch_items VALUES(?,?)',(batch,row['id']))
         db.execute("UPDATE reels SET status='reading',updated=? WHERE id=?",(time.time(),row['id']))
+        if not row['info_only']:
+            processing_metrics.claim(db,batch,row['id'])
         return dict(row)
 
 
@@ -1134,7 +1142,7 @@ class Handler(BaseHTTPRequestHandler):
                     self.reply({'error':'Not found'},404); return
                 target = DATA/'thumbnails'/filename
             else:
-                allowed = {'/':'index.html','/app.js':'app.js','/style.css':'style.css'}
+                allowed = {'/':'index.html','/app.js':'app.js','/processing.js':'processing.js','/style.css':'style.css'}
                 if path not in allowed:
                     self.reply({'error':'Not found'},404); return
                 target = ROOT/'web'/allowed[path]
