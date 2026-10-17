@@ -69,10 +69,15 @@ This is an experimental local project and an unpacked extension, not a store-rev
 
 ## Repository layout
 
+Project documents: [specification](docs/spec.md), [project structure](docs/project-structure.md), [agent instructions](AGENTS.md), [decision contract](decision.md), and [interface design](design.md).
+
 ```text
 app/                 Python backend, local dashboard and Chromium extension
 tests/               Backend tests and simulated extension checks
 docs/USAGE.md        Configuration and troubleshooting
+docs/spec.md         Product specification
+docs/project-structure.md  Repository map and implementation boundaries
+AGENTS.md            Contributor and agent instructions
 README.md            Installation and first use
 CONTRIBUTING.md      Development checks
 SECURITY.md          Sensitive data and reporting guidance

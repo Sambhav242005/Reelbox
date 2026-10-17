@@ -2,7 +2,7 @@
 
 ## Read first
 
-Read `spec.md`, `decision.md`, `design.md`, and `project-structure.md` before changing behavior. These describe the implemented contracts; `README.md` and `docs/USAGE.md` describe operation, validation, and account prerequisites. Keep unverified live-account behavior clearly labeled.
+Read [the specification](docs/spec.md), [project structure](docs/project-structure.md), [decision contract](decision.md), and [interface design](design.md) before changing behavior. These describe the implemented contracts; [README.md](README.md) and [docs/USAGE.md](docs/USAGE.md) describe operation, validation, and account prerequisites. Keep unverified live-account behavior clearly labeled.
 
 ## Product rules
 

@@ -7,12 +7,14 @@ Reelbox/
   app/                 Backend, dashboard, extension and launchers
   tests/               Backend unit tests and simulated extension checks
   docs/USAGE.md        Current configuration and troubleshooting
+  docs/spec.md         Product contracts and historical revisions
+  docs/project-structure.md  This repository map
   docs/history/        Historical implementation notes
+  AGENTS.md            Root contributor and agent instructions
   README.md            Installation and first use
   CONTRIBUTING.md       Development and validation
   SECURITY.md           Private data handling
   Start Reelbox.cmd    Windows entry point
-  spec.md              Product contracts and historical revisions
   decision.md          Decision contracts and historical revisions
   design.md            Interface contracts and historical revisions
 ```
@@ -25,11 +27,11 @@ The current default is MiniCPM for vision and decisions, with text embeddings fo
 
 Keep the existing application entry point and extension pairing behavior. `model_client.py` owns provider configuration, HTTP transport, images, chat JSON repair, and typed decision validation. `app.py` owns migrations, metadata/cover acquisition, caching, analysis, candidate retrieval, routing policy, and persistence. The additive migration preserves old records and introduces analysis mode, source title, metadata state, and explicit video requests.
 
-The extension discovers saves and available metadata. The backend owns processing and persistence. MiniCPM describes evidence when requested, D1 chooses routes and categories, and ordinary application logic enforces policy. The web UI consumes persisted records and requests explicit deeper analysis.
+The extension discovers saves and available metadata. The backend owns processing and persistence. MiniCPM handles visual understanding and routing by default; an explicitly configured D1 decision model uses the retained native integration. Ordinary application logic enforces policy. The web UI consumes persisted records and requests explicit deeper analysis.
 
 ## Current model override: MiniCPM only
 
-The user-selected default is now local minicpm-v4.6:latest for both vision/writing and structured folder/routing judgments through /api/chat. D1 is unloaded and is not used by default. REELBOX_DECISION_MODEL defaults to the vision model; an explicit different override retains the native System One integration. Text embeddings remain nomic-embed-text for retrieval, not content decisions. Chat decision support scores are generated estimates, not native logits or calibrated probabilities; compatibility distributions split residual mass uniformly and are marked score_source=generated_estimate. Existing thresholds remain provisional and need evaluation for this model. This section supersedes earlier D1-first wording. Cached decisions have a new prompt version. Processing remains one reel at a time, with mandatory covers, model backoff, preserved previous results and explicit per-reel video approval. Switching models does not resume stopped work or reprocess completed records.
+The default is local `minicpm-v4.6:latest` for vision, writing and structured folder/routing judgments through `/api/chat`. `REELBOX_DECISION_MODEL` defaults to the vision model; an explicit different override retains the native System One integration. Text embeddings remain `nomic-embed-text` for retrieval. Chat decision support scores are generated estimates, not calibrated probabilities; compatibility distributions split residual mass uniformly and are marked `score_source=generated_estimate`. Thresholds remain provisional. The current worker admission window is five, with atomic claims and serialized folder assignment/creation. Mandatory covers, model backoff, preserved previous results and explicit per-reel video approval still apply. Switching models does not resume stopped work or reprocess completed records.
 
 
 ## Automatic matching for user-created folders

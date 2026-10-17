@@ -33,7 +33,7 @@ With these defaults, model inference, the database and dashboard stay local. Ins
 
 ## Connect Instagram
 
-1. Load `extension/` as an unpacked extension in your normal Edge, Chrome, or Brave profile. See [extension instructions](extension/README.md).
+1. Load `app/extension/` as an unpacked extension in your normal Edge, Chrome, or Brave profile. See [extension instructions](../../app/extension/README.md).
 2. Open Instagram, your profile, then Saved.
 3. Click the extension and choose Connect this Saved page.
 4. Use Sync now in the extension for an immediate scan. Sync saves in the dashboard queues a request checked by the extension's next alarm.
@@ -139,7 +139,7 @@ Tests use temporary data and synthetic evidence. D1 and MiniCPM passed actual lo
 
 Never share `data/`, which contains private session files and cached evidence. API Anything remains packaged for optional legacy `sync.mjs` capture; it is not the current collector or a validated saved-feed API. Captures may contain credentials.
 
-Provider references: [D1](https://ollama.com/library/d1), [MiniCPM](https://ollama.com/library/minicpm-v4.6), [System One](https://docs.ollama.com/api/systemone). See workspace [spec](../../spec.md), [decision contract](../../decision.md), [design](../../design.md), and [structure](../../project-structure.md).
+Provider references: [D1](https://ollama.com/library/d1), [MiniCPM](https://ollama.com/library/minicpm-v4.6), [System One](https://docs.ollama.com/api/systemone). See [spec](../spec.md), [decision contract](../../decision.md), [design](../../design.md), and [structure](../project-structure.md).
 
 ## Video approval and primary folders
 

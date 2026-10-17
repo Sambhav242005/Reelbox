@@ -1,5 +1,7 @@
 # Reelbox product specification
 
+Current defaults use local MiniCPM for vision and routing, text embeddings for retrieval, and five reel workers. The model-override and concurrency sections below supersede the earlier D1-first and single-worker descriptions. Video analysis always requires explicit approval per reel. See [project structure](project-structure.md), [usage](USAGE.md), and [root agent instructions](../AGENTS.md).
+
 Status: D1-first local-model implementation, 2026-10-16. Automated checks use temporary libraries and simulated model responses. D1 and MiniCPM passed live synthetic-image checks; real-account behavior remains a separate verification.
 
 ## Goal
@@ -52,7 +54,7 @@ Existing records migrate without forced model reanalysis. Old sampled-video anal
 
 ## Interface and acceptance
 
-Use the dark sidebar/detail layout in design.md. Expose search, topic boxes, compact reel list, quick/video/review/error views, persistent missing-information notifications, batch progress, Stop, Resume and model-wait state. Detail shows the cover, concise preview or summary, tags, source link, explicit Analyze video and expandable evidence. On mobile provide Back to library without horizontal overflow.
+Use the interface contract in [design.md](../design.md); its later browsing-redesign section supersedes the earlier dark sidebar/detail layout. Expose search, topic boxes, compact reel list, quick/video/review/error views, persistent missing-information notifications, batch progress, Stop, Resume and model-wait state. Detail shows the cover, concise preview or summary, tags, source link, explicit Analyze video and expandable evidence. On mobile provide Back to library without horizontal overflow.
 
 Validate quick D1-only acceptance, MiniCPM fallback after D1, video escalation, missing-thumbnail holds, model download/offline waits, backoff, interrupted work, Stop/Resume persistence, fifty-reel boundaries, category novelty, migrations, caching and temporary cleanup. Real Instagram coverage still requires an account comparison; synthetic tests cannot prove complete collection. Confidence thresholds are conservative initial heuristics, not calibrated accuracy guarantees.
 
