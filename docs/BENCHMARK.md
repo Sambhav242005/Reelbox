@@ -1,6 +1,6 @@
 # Recorded organization benchmark
 
-This is the single tech-only run used in the public demo, recorded on 17 October 2026. It is a small warm-model sample, not a general speed or accuracy claim.
+MiniCPM-V 4.6 organized this 50-reel technology sample on 17 October 2026. The model was already loaded. These are the timings from the run shown in the demo.
 
 | Measurement | Recorded result |
 | --- | --- |
@@ -15,12 +15,14 @@ This is the single tech-only run used in the public demo, recorded on 17 October
 | Warm-up | 2 separate examples, excluded |
 | Original library fingerprint unchanged | Yes |
 
-The run used cached source titles, captions and readable covers with fresh local inference. It excluded Instagram retrieval, media downloads, video analysis and cold model loading. Source text and existing folder memberships excluded manga, manhwa, anime and gaming. Frame samples were not needed or taken.
+The run used saved titles, captions and covers with fresh local inference. Instagram retrieval, downloads, video analysis and model loading were outside the measurement. The sample excludes manga, manhwa, anime and gaming. No video frames were sampled.
 
 Hardware: Intel Core i7-14700K and NVIDIA GeForce RTX 4070 Ti; the machine also reports Intel UHD Graphics 770. This does not independently establish which processor handled each inference operation.
 
-**Model identity matters:** the configured vision/decision alias was `minicpm-v4.6:latest`, but Ollama reported `qwen35`, **752.16M parameters, Q4_K_M**. These numbers must not be attributed to the standard MiniCPM model. The retrieval model was `nomic-embed-text`.
+The vision and decision model was MiniCPM-V 4.6, loaded as `minicpm-v4.6:latest` with Q4_K_M quantization. [OpenBMB's model card](https://huggingface.co/openbmb/MiniCPM-V-4.6) describes its Qwen3.5-0.8B language backbone and SigLIP2-400M vision encoder. Ollama's `qwen35` family and 752.16M parameter count describe the language component, not the full multimodal model. Retrieval used `nomic-embed-text`.
 
-A successful result means a saved analysis with at least one folder assignment. Folder correctness was not manually scored. Throughput is successful results divided by elapsed wall time; median latency is calculated across successful unique reels and includes retries/waits. Inference caching started empty; cache entries created during this run remain private. The original library was opened read-only and its records, folder assignments and settings were checked against its preparation fingerprint.
+A reel counts as organized when it has a saved analysis and at least one folder assignment. The assignments have not been manually scored. Throughput is the number of organized reels divided by elapsed wall time. Median latency covers successful unique reels, including any retries or waits.
+
+The inference cache started empty. The source library was opened read-only, and a fingerprint check confirmed that its records, folder assignments and settings stayed unchanged. Cache entries from the run remain private. Results will vary with hardware, model settings and the reels being processed.
 
 Full aggregate metadata: [benchmark.json](media/benchmark.json). Reproduction and telemetry definitions: [DEMO.md](DEMO.md). Raw recordings, private sample IDs and source fingerprints are intentionally excluded from Git.

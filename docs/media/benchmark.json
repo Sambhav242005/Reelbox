@@ -43,7 +43,7 @@
     "parameter_size": "752.16M",
     "quantization_level": "Q4_K_M"
   },
-  "model_disclosure": "Configured model IDs are aliases. Interpret speed using the resolved model metadata, not the alias name.",
+  "model_disclosure": "The model family and parameter size reported by Ollama describe the language component; they do not identify a replacement model or the full multimodal parameter count.",
   "content_policy": "GitHub, AI, coding and technology only; exclude manga, manhwa, anime and gaming in source text or folder memberships.",
   "metrics": {
     "batch_id": 1,
@@ -64,5 +64,6 @@
   },
   "source_unchanged": true,
   "cache_entries_created_during_run": 104,
-  "accuracy_claim": "Not evaluated; completion is not classification accuracy."
+  "accuracy_claim": "Not evaluated; completion is not classification accuracy.",
+  "model_name": "MiniCPM-V 4.6"
 }

@@ -1,14 +1,14 @@
 # LinkedIn caption draft
 
-I kept saving useful reels about GitHub projects, AI tools and development, then losing them in Saved.
+I kept saving reels about GitHub projects and AI tools, then couldn't find them when I needed them.
 
-So I built Reelbox: a local library that turns those saves into searchable topic folders.
+That's why I built Reelbox. It turns Instagram Saved into a searchable library on my computer, with MiniCPM-V 4.6 reading captions and covers to sort reels into topic folders.
 
-In this demo, follow one reel from Unorganized → Organizing → its topic folder. The panel shows live progress, successful-reel throughput and timing, with review items and errors counted separately.
+The video follows one reel from Unorganized through Organizing and into its folder. You can see the progress and processing speed update as the rest of the sample runs. Reels that need review and errors have their own counts.
 
-For the recorded sample, 50 tech-related reels were organized in 12.0 seconds on my machine using a warm local model. That measures fresh AI organization of cached captions and covers; it excludes Instagram retrieval, downloads and cold starts. The configured model alias resolves to a 752M Qwen-family model. Completion is not an accuracy score.
+On my machine, the 50-reel sample took about 12 seconds with the model already loaded. It used cached captions and covers, so that time excludes Instagram retrieval and downloads. I haven't manually scored the folder assignments yet.
 
-Caption and cover come first. Video analysis needs explicit approval. The dashboard, database and default inference stay local.
+Reelbox asks before downloading a video for deeper analysis. The dashboard, database and default model inference stay local.
 
 Code, demo and benchmark details: https://github.com/Sambhav242005/Reelbox
 

@@ -1,16 +1,16 @@
 # Reelbox
 
-**Turn saved Instagram reels into a local, searchable library.**
+Find the Instagram reels you saved.
 
-Reelbox collects your saved reel links through a Chromium extension, organizes them into topic folders, and lets you search, browse and revisit them from a local dashboard.
+Reelbox collects links from Instagram Saved through a Chromium extension. It sorts them into topic folders you can browse and search on your computer.
 
 ## See it organize real reels
 
 [![Watch Reelbox move a saved reel into its topic folder](docs/media/reelbox-preview.gif)](docs/media/reelbox-demo.mp4)
 
-[Watch the captioned demo](docs/media/reelbox-demo.mp4) · [Measured results](docs/BENCHMARK.md) ? [Recording guide](docs/DEMO.md)
+[Watch the captioned demo](docs/media/reelbox-demo.mp4) · [Measured results](docs/BENCHMARK.md) · [Recording guide](docs/DEMO.md)
 
-The demo features GitHub, AI, coding and technology saves, with live progress and measured speed. It uses cached captions and covers with fresh local inference; Instagram retrieval is excluded. The configured model alias resolves to a 752M Qwen-family model on the recording machine. See the benchmark for the exact workload and hardware; completion is not an accuracy claim.
+Watch one reel move into its topic folder while MiniCPM-V 4.6 organizes a sample of 50 GitHub, AI and technology saves. The panel shows progress and processing speed. This run used cached captions and covers, so its timing excludes Instagram retrieval. The [benchmark](docs/BENCHMARK.md) explains the setup and what was measured.
 
 ## What it does
 
@@ -22,7 +22,7 @@ The demo features GitHub, AI, coding and technology saves, with live progress an
 - Preserve queued work, Stop/Resume state and verification pauses across restarts.
 - Follow a reel through Unorganized → Organizing → its topic folder, with durable timing and successful-reel throughput.
 
-The current defaults use local `minicpm-v4.6:latest` for vision, writing and routing, plus `nomic-embed-text` for retrieval. The code also retains an optional D1 integration; D1 is not required by the current defaults. Model scores are estimates, not calibrated accuracy percentages.
+MiniCPM-V 4.6 (`minicpm-v4.6:latest`) handles vision, writing and routing locally. `nomic-embed-text` supports search and topic retrieval. D1 is available as an optional decision model. Model scores are estimates; they have not been calibrated against a labeled test set.
 
 ## Requirements
 

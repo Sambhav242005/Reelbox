@@ -27,7 +27,8 @@ if not 30 <= duration <= 45:
     raise SystemExit(f'Recording is {duration:.1f}s; select honest cuts before exporting.')
 font = 'C\\:/Windows/Fonts/segoeui.ttf'
 details = benchmark['resolved_vision_model']
-label = f"1x real time  |  Warm local alias - {details['family']} / {details['parameter_size']} / {details['quantization_level']}"
+model_name = benchmark.get('model_name', benchmark['models']['vision'])
+label = f"1x real time  |  {model_name} / {details['quantization_level']}"
 overlay = f"drawtext=fontfile='{font}':text='{label}':fontcolor=white:fontsize=12:x=w-tw-24:y=42:box=1:boxcolor=0x204b38@0.94:boxborderw=7"
 # Normalize the first step caption in exports, including older Windows-console
 # captures where the original em dash was encoded as a question mark.

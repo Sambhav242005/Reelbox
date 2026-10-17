@@ -6,9 +6,9 @@ The public demo uses GitHub, AI, coding and technology reels only. Manga, manhwa
 
 The isolated run uses cached source titles, captions and covers with fresh local inference. It does not measure Instagram collection, media retrieval, video analysis, model loading or cold starts. Two separate warm-up reels are excluded. There are five application workers; the inference service controls actual scheduling.
 
-The configured `minicpm-v4.6:latest` alias on the recording machine resolves to `qwen35`, 752.16M parameters, Q4_K_M. The alias name alone must not be interpreted as the standard MiniCPM model or used to compare its performance. See [the recorded benchmark metadata](media/benchmark.json) for hardware, outcomes and timings. Organization completion is not an accuracy measurement.
+The recording uses MiniCPM-V 4.6 (`minicpm-v4.6:latest`), quantized as Q4_K_M. Its Qwen language backbone explains the `qwen35` family reported by Ollama. See [the recorded benchmark metadata](media/benchmark.json) for hardware and timings. Folder assignments have not been manually scored.
 
-The final MP4 runs at normal speed. Captions, a visible cursor and the workload boundary are added for presentation. The raw WebM and private timeline remain in `work/demo/recording/`; public exports are in `docs/media/`.
+The MP4 plays at normal speed, with captions and a visible cursor. The raw WebM and private timeline are in `work/demo/recording/`; public exports are in `docs/media/`.
 
 ## Repeat the workflow
 
@@ -40,7 +40,7 @@ node scripts/record-demo.mjs --record
 .\.venv\Scripts\python.exe scripts/finish-demo.py
 ```
 
-Discovery saves the actual interactive field map. Rehearsal checks the panel, detail navigation, folders and controls without starting inference. Recording requires the rehearsal marker, follows one reel and resumes only the isolated service. The report verifies the original library fingerprint and resolves the model metadata. Export refuses recordings outside 30–45 seconds instead of silently accelerating the footage.
+Discovery saves a map of the page's controls. Rehearsal checks the panel, reel navigation and folders without starting inference. Recording requires a passed rehearsal and resumes only the isolated service. The report checks the source library's fingerprint and reads the model metadata. Export accepts recordings between 30 and 45 seconds and leaves playback speed unchanged.
 
 ## Permanent processing panel
 

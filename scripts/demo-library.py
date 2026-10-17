@@ -183,12 +183,17 @@ def report():
     original = sqlite3.connect((source / 'library.sqlite').as_uri() + '?mode=ro', uri=True)
     unchanged = fingerprint(original) == manifest['source_fingerprint']; original.close()
     hardware = subprocess.run(['powershell.exe', '-NoProfile', '-Command', "[pscustomobject]@{cpu=(Get-CimInstance Win32_Processor).Name;gpu=@((Get-CimInstance Win32_VideoController).Name)} | ConvertTo-Json -Compress"], capture_output=True, text=True)
-    resolved = app.model_client.request('/api/show', {'model':app.MODEL}).get('details', {})
+    metadata = app.model_client.request('/api/show', {'model':app.MODEL})
+    resolved = metadata.get('details', {})
+    info = metadata.get('model_info', {})
+    basename, finetune = info.get('general.basename'), info.get('general.finetune')
+    model_name = basename + ' ' + finetune.replace('_', '.') if basename and finetune else app.MODEL
     result = {'sample_size': 50, 'showcase_size': 20, 'topics': manifest['topics'],
               'scope': manifest['scope'], 'warmup_examples': 2, 'models': {'vision':app.MODEL,'decision':app.DECISION_MODEL,'embedding':app.EMBED_MODEL},
               'workers': app.QUEUE_WINDOW, 'hardware': json.loads(hardware.stdout),
+              'model_name': model_name,
               'resolved_vision_model': {key:resolved.get(key) for key in ('family','parameter_size','quantization_level')},
-              'model_disclosure': 'Configured model IDs are aliases. Interpret speed using the resolved model metadata, not the alias name.',
+              'model_disclosure': 'The model family and parameter size reported by Ollama describe the language component; they do not identify a replacement model or the full multimodal parameter count.',
               'content_policy': manifest['content_policy'],
               'metrics': state['metrics'], 'outcomes': outcomes, 'source_unchanged': unchanged,
               'cache_entries_created_during_run': cache_count, 'accuracy_claim': 'Not evaluated; completion is not classification accuracy.'}
